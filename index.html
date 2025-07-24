@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>King's Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      padding: 10px 30px;
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 24px;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #343a40;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    header {
+      padding: 80px 20px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 0.3s;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    section {
+      padding: 60px 30px;
+      max-width: 960px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideUp 1s ease forwards;
+    }
+
+    section:nth-of-type(2) {
+      animation-delay: 0.5s;
+    }
+
+    section:nth-of-type(3) {
+      animation-delay: 0.8s;
+    }
+
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #6f42c1;
+    }
+
+    section p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .project {
+      flex: 1 1 calc(50% - 20px);
+      background: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #dee2e6;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .project img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 16px;
+    }
+
+    .project h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #343a40;
+    }
+
+    .project p {
+      margin: 0;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translate(-50%, -20px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .project {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+  </nav>
+
+  <header>
+    <h1>King</h1>
+    <p>Web Developer - Doing it for 2 years</p>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hi, I'm King. I’ve been a passionate web developer for the past 2 years. I focus on building clean, efficient, and modern web experiences using HTML, CSS, and JavaScript. I enjoy solving problems and constantly improving my craft.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project">
+        <img src="https://via.placeholder.com/400x180" alt="Personal Blog">
+        <div class="project-content">
+          <h3>Project 1: Personal Blog</h3>
+          <p>A minimal and elegant blog layout designed for seamless readability, built with modern responsive web techniques.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="https://via.placeholder.com/400x180" alt="Portfolio Site">
+        <div class="project-content">
+          <h3>Project 2: Portfolio Site</h3>
+          <p>This polished portfolio page showcasing my skills and development work with a clean design and interactive UI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('section').forEach(sec => {
+      observer.observe(sec);
+    });
+  </script>
+</body>
+</html>
